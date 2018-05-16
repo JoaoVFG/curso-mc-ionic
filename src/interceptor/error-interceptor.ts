@@ -3,11 +3,14 @@ import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HTTP_INTERCEPTORS
 import { Observable } from 'rxjs/Rx'; //import atualizado
 import { Injectable } from '@angular/core';
 import { StorageService } from '../services/storage.service';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
+
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 	
-	constructor(public storageService : StorageService){
+	constructor(public storageService : StorageService,
+				public alertController: AlertController){
 
 	}
 
@@ -28,17 +31,53 @@ export class ErrorInterceptor implements HttpInterceptor {
 +            	console.log(errorObj);
 
 				switch(errorObj.status){
+					case 401:
+						this.handle401();
+					break;
+
 					case 403:
 						this.handle403();
 					break;
+
+					default:
+						this.handleDefaultError(errorObj);
+					
 				}				
 
 				return Observable.throw(errorObj);
 			}) as any;
 	}
 
+	handle401(){
+		let alert = this.alertController.create({
+						title:   'Erro 401 : Falha de Autenticação',
+						message: 'Email ou senha Incorretos',
+						enableBackdropDismiss: false,
+						buttons : [
+							{
+								text : 'OK'
+							}
+						]
+					});
+		alert.present();
+	}
+
 	handle403(){
 		this.storageService.setLocalUser(null);
+	}
+
+	handleDefaultError(errorObj){
+		let alert = this.alertController.create({
+						title: 'Erro' + errorObj.status + ': ' + errorObj.error,
+						message: errorObj.message,
+						enableBackdropDismiss: false,
+						buttons : [
+							{
+								text : 'OK'
+							}
+						]	
+					});
+		alert.present();
 	}
 }
 
