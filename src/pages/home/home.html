@@ -1,22 +1,22 @@
 <ion-content padding>
-  <h3>Sistema de Pedidos</h3>
+    <h3>Sistema de Pedidos</h3>
 
 
-  <img src="assets/imgs/telaInicial.png" alt = "logo">
-  
-  <form>
-    
-    <ion-item>
-      <ion-label stacked>Email</ion-label>
-      <ion-input [(ngModel)]="creds.email" name ="email" type = "text"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label stacked>Senha</ion-label>
-      <ion-input [(ngModel)]="creds.senha" name ="senha" type = "password"></ion-input>
-    </ion-item>
-    <button ion-button block (click)="login()">Entrar</button>
-  </form>
+    <img src="assets/imgs/telaInicial.png" alt="logo">
 
-  <button ion-button block outline>Registrar</button>
+    <form>
+
+        <ion-item>
+            <ion-label stacked>Email</ion-label>
+            <ion-input [(ngModel)]="creds.email" name="email" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Senha</ion-label>
+            <ion-input [(ngModel)]="creds.senha" name="senha" type="password"></ion-input>
+        </ion-item>
+        <button ion-button block (click)="login()">Entrar</button>
+    </form>
+
+    <button ion-button block outline (click)="signup()">Registrar</button>
 
 </ion-content>
