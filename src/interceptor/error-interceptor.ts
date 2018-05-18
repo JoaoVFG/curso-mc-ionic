@@ -74,7 +74,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 	handle422(errorObj) {
         let alert = this.alertController.create({
             title: 'Erro 422: Validação',
-            message: this.listErrors(errorObj.listaErros),
+            message: this.listErrors(errorObj.listaErrossss),
             enableBackdropDismiss: false,
             buttons: [
                 {
