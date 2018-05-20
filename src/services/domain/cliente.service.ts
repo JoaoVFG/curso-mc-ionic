@@ -4,7 +4,6 @@ import { Observable } from "rxjs/Rx";
 import { ClienteDto } from "../../models/cliente.dto";
 import { API_CONFIG } from "../../config/api.config";
 import { StorageService } from "../storage.service";
-import { ResponseType } from "@angular/http";
 
 @Injectable()
 export class ClienteService{
