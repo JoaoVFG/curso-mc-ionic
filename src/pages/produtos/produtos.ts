@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ProdutoDto } from '../../models/produto.dto';
 import { ProdutoService } from '../../services/domain/produto.service';
 import { API_CONFIG } from '../../config/api.config';
-import { ProdutoDetailPage } from '../produto-detail/produto-detail';
+
 
 @IonicPage()
 @Component({
