@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { PedidoDto } from '../../models/pedido.dto';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
+
 @IonicPage()
 @Component({
   selector: 'page-payment',
@@ -30,7 +31,7 @@ export class PaymentPage {
 
   nextPage(){
     this.pedido.pagamento = this.formGroup.value;
-    console.log(this.pedido);
+    this.navCtrl.setRoot('OrderConfirmationPage', {pedido : this.pedido})
   }
 
 }
