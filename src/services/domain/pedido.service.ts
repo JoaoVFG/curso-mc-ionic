@@ -12,7 +12,6 @@ export class PedidoService{
     
 
     insert(pedido : PedidoDto){
-        console.log(pedido.enderecoDeEntrega);
         
         return this.httpClient.post(
             `${API_CONFIG.baseUrl}/pedidos`,
