@@ -16,6 +16,7 @@ export class ProfilePage {
   
   cliente : ClienteDto;
   picture : string;
+  cameraOn : boolean = false;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
@@ -25,6 +26,10 @@ export class ProfilePage {
   }
 
   ionViewDidLoad() {
+    this.loadData();
+  }
+  
+  loadData(){
     let localUser = this.storage.getLocalUser();
     if(localUser && localUser.email){
       
@@ -44,7 +49,7 @@ export class ProfilePage {
       this.navCtrl.setRoot('HomePage');
     }
   }
-  
+
   getImageIfExists(){
     this.clienteService.getImageFromBucket(this.cliente.id)
       .subscribe(response =>{
@@ -55,6 +60,9 @@ export class ProfilePage {
 
 
   getCameraPicture(){
+
+    this.cameraOn = true;
+
     const options : CameraOptions = {
       quality : 100,
       destinationType : this.camera.DestinationType.DATA_URL,
@@ -64,8 +72,22 @@ export class ProfilePage {
 
     this.camera.getPicture(options).then((imageData) => {
       this.picture = 'data:image/png;base64,' + imageData;
+      this.cameraOn = false;
     }, error =>{
 
     });
+  }
+
+  sendPicture() {
+    this.clienteService.uploadPicture(this.picture)
+      .subscribe(respose =>{
+        this.picture = null;
+        this.loadData();
+      },
+      erros => {});
+  }
+
+  cancel(){
+    this.picture = null;
   }
 }
